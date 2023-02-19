@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "start:prod": "node dist/index.js",
+    "postinstall": "npm run compile",
     "compile": "tsc",
     "build": "npm run compile",
     "dev": "npm run start:dev",
