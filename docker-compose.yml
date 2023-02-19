@@ -47,10 +47,7 @@ services:
       - ./db-data/:/var/lib/postgresql/data
     networks:
       - my-network
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=secret
-      - POSTGRES_DB=db
+    env_file: .env
     restart: always
     healthcheck:
       test: ['CMD-SHELL', 'pg_isready']
