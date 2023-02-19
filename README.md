@@ -13,6 +13,8 @@
 
 ## Configuration
 
+This section can be partially skipped by running `create-ms.sh`. The shell script takes in a microservice name as an argument.
+
 ### Node configuration
 
 Create new Node project.
@@ -42,6 +44,61 @@ Add runtime scripts to package.json.
     "dev": "npm run start:dev",
     "start:dev": "nodemon --config nodemon.json src/index.ts",
 },
+```
+
+---
+Add `tsconfig.json`.
+
+```json
+{
+  "compilerOptions": {
+
+    /* Language and Environment */
+    "target": "es5" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
+
+    /* Modules */
+    "module": "commonjs" /* Specify what module code is generated. */,
+    "rootDir": "./src" /* Specify the root folder within your source files. */,
+
+    /* Emit */
+    "outDir": "./dist" /* Specify an output folder for all emitted files. */,
+
+    /* Interop Constraints */
+    "esModuleInterop": true /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables `allowSyntheticDefaultImports` for type compatibility. */,
+    "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
+
+    /* Type Checking */
+    "strict": true /* Enable all strict type-checking options. */,
+    "noImplicitAny": true /* Enable error reporting for expressions and declarations with an implied `any` type.. */,
+    "strictNullChecks": true /* When type checking, take into account `null` and `undefined`. */,
+    "strictFunctionTypes": true /* When assigning functions, check to ensure parameters and the return values are subtype-compatible. */,
+    "noImplicitThis": true /* Enable error reporting when `this` is given the type `any`. */,
+    "alwaysStrict": true /* Ensure 'use strict' is always emitted. */,
+    "noUnusedLocals": true /* Enable error reporting when a local variables aren't read. */,
+    "noUnusedParameters": true /* Raise an error when a function parameter isn't read */,
+    "noImplicitReturns": true /* Enable error reporting for codepaths that do not explicitly return in a function. */,
+    "noFallthroughCasesInSwitch": true /* Enable error reporting for fallthrough cases in switch statements. */,
+    
+    /* Completeness */
+    "skipLibCheck": true /* Skip type checking all .d.ts files. */
+  }
+}
+
+```
+
+---
+Add `nodemon.json`.
+
+```json
+{
+  "restartable": "rs",
+  "ignore": [".git", "node_modules/", "dist/"],
+  "watch": ["src/"],
+  "execMap": {
+    "ts": "node -r ts-node/register"
+  },
+  "ext": "js,json,ts"
+}
 ```
 
 ---
@@ -160,6 +217,7 @@ Verify that `DATABASE_URL` was added into `.env`.
 Create the model or models.
 
 ```prisma
+// prisma/schema.prisma
 model User {
     id Int @id @default(autoincrement())
     email String @unique
