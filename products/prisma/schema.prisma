@@ -11,7 +11,7 @@ model Product {
     manufacturer String
     description  String?
     // Unit: Cent
-    price        Float
+    price        Int
     // Unit: Centimeter
     width        Float?
     // Unit: Centimeter
