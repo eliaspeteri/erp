@@ -11,8 +11,12 @@ datasource db {
 }
 
 model User {
-    id    Int     @id @default(autoincrement())
-    email String  @unique
-    name  String?
-    role  String
+    id             Int     @id @default(autoincrement())
+    email          String  @unique
+    emailVerified  Boolean
+    username       String  @unique
+    hashedPassword Bytes
+    salt           Bytes
+    name           String?
+    role           String
 }
