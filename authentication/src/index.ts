@@ -10,4 +10,6 @@ try {
   server.listen(Config.PORT, (): void => {
     logger.info(`Connected successfully, url: ${Config.URL}:${Config.PORT}`);
   });
-} catch (error) {}
+} catch (error) {
+  logger.error(`Unable to run server.`);
+}
